@@ -11,3 +11,23 @@ The structure of this folder is:
     - simple_shm_publisher.h: publication of SHM data
     - simple_shm_subscriber.h: subscribtion to SHM data
     - two_processes_shm_usage.h: example how to split custom SHM Provider and Client codebases between different executables
+    
+    
+A few words about the API
+
+The following entities make SHM API:
+
+SharedMemoryProvider
+A zenoh interface for interacting with specific SHM provider. Wraps SharedMemoryProviderBackend and does some common under the hood job to provide high-level interface
+for SHM buffer allocation.
+
+SharedMemoryProviderBackend
+An SHM provider's implementation that is able to allocate\deallocate SHM buffers. In other words, this is a shared memory allocator that implements some specific API.
+
+SharedMemoryClient
+An SHM client's implementation that is able to map SHM buffers allocated by the specific provider.
+
+Protocol
+Protocol is SHM protocol. Obviously, as we have different SHM clients and different SHM providers, they are not necessary compatible between each other. This ID is used to distinguish between compatible entities.
+
+The more precise doc is in *.h files of the API
